@@ -17,7 +17,7 @@ j: jours;
 f: float;
 
 begin
-print "Tapez un jour (0=dimanche, 6=Samedi)";
+print "Tapez un jour (0=dimanche, 6=Samedi) ";
 readln j;
 
 switch (j) {

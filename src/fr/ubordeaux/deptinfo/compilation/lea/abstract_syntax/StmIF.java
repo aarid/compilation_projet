@@ -24,6 +24,7 @@ public class StmIF extends StmBinary {
 		String var = "_if_test__" + this.getId();
 		String label_then = "_if_label_then__" + this.getId();
 		String label_fin = "_if_label_fin__" + this.getId();
+		
 		result += tab() + "int " + var + " = " + test.generateCode() + ";" + NL;
 		result += tab() + "if (" + var + ")" + NL;
 		incIndent();
