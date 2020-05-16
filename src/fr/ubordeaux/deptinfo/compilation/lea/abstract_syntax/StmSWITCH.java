@@ -76,11 +76,16 @@ public class StmSWITCH extends StmList {
 				result += tab() + jump_case + ":{}" + NL + NL;				
 				
 			}
-		result += tab() + "default_" + defaultStm.getId() + ": {" + NL;
-		incIndent();
+
+		if(this.defaultStm != null) {
+
+			result += tab() + "default_" + defaultStm.getId() + ": {" + NL;
+			incIndent();
 			result += defaultStm.generateCode();
-		decIndent();
-		result += tab() + "}" + NL;
+			decIndent();
+			result += tab() + "}" + NL;
+
+		}
 		
 		result += tab() + end + ":{}" + NL + NL;
 		
