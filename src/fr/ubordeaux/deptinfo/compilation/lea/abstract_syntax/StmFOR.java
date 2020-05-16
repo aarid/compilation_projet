@@ -29,10 +29,49 @@ public class StmFOR extends StmTernary {
 		String result = "";
 		result += super.generateCode();
 		// TODO
-		result += tab() + "_FOR_" + this.getId() + ":" + NL;
+		String var = "_if_test__" + this.getId();
+		String label_then = "_if_label_then__" + this.getId();
+		String label_fin = "_if_label_fin__" + this.getId();
+
+		String label_jump_for = "_FOR__" + this.getId();
+
+		result += getFirst().generateCode();
+
+		result += tab() + "int " + var + ";" + NL;
+		// TODO
+		result += tab() + label_jump_for + ":" + NL;
 		this.incIndent();
-		result += tab() + "// Code FOR ici..." + NL;
-		result += tab() + "printf(\"--- Manque FOR...\\n\");" + NL;
+
+
+
+		result += tab() + var + " = " + expr.generateCode() + ";" + NL;
+
+		result += tab() + "if (" + var + ")" + NL;
+
+		incIndent();
+			result += tab() + "goto " + label_then + ";" + NL;
+		decIndent();
+
+
+
+		result += tab() + "goto " + label_fin + ";" + NL;
+
+
+		result += tab() + label_then + ":{" + NL;
+		incIndent();
+		result += getThird().generateCode();
+		decIndent();
+		result += tab() + "}" + NL;
+
+
+		result += getSecond().generateCode();
+		result += tab() + "goto " + label_jump_for + ";" + NL;
+
+
+		result += tab() + label_fin + ":{}" + NL;
+
+
+
 		this.decIndent();
 		return result;
 	}
