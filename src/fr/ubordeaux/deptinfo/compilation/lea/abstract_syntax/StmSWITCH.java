@@ -18,30 +18,6 @@ public class StmSWITCH extends StmList {
 	}
 
 
-/*		String result = "";
-		result += super.generateCode();
-
-		if (this.getRight()!=null) {
-			result += tab() + "// Ooops, ELSE pas encore supporté, seul le THEN est généré ici" + NL;
-		}
-		String var = "_if_test__" + this.getId();
-		String label_then = "_if_label_then__" + this.getId();
-		String label_fin = "_if_label_fin__" + this.getId();
-		result += tab() + "int " + var + " = " + test.generateCode() + ";" + NL;
-		result += tab() + "if (" + var + ")" + NL;
-		incIndent();
-			result += tab() + "goto " + label_then + ";" + NL;
-		decIndent();
-		result += tab() + "goto " + label_fin + ";" + NL;
-		result += tab() + label_then + ":{" + NL;
-		incIndent();
-			result += getLeft().generateCode();
-		decIndent();
-		result += tab() + "}" + NL;
-		result += tab() + label_fin + ":{}" + NL;
-		return result;
-		*/
-	
 	@Override
 	public String generateCode() throws CodeException {
 		
