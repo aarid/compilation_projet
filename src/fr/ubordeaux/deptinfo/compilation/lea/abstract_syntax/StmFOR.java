@@ -26,9 +26,10 @@ public class StmFOR extends StmTernary {
 
 	@Override
 	public String generateCode() throws CodeException {
+
 		String result = "";
 		result += super.generateCode();
-		// TODO
+
 		String var = "_if_test__" + this.getId();
 		String label_then = "_if_label_then__" + this.getId();
 		String label_fin = "_if_label_fin__" + this.getId();
@@ -36,23 +37,17 @@ public class StmFOR extends StmTernary {
 		String label_jump_for = "_FOR__" + this.getId();
 
 		result += getFirst().generateCode();
-
 		result += tab() + "int " + var + ";" + NL;
-		// TODO
+
+
 		result += tab() + label_jump_for + ":" + NL;
 		this.incIndent();
 
-
-
 		result += tab() + var + " = " + expr.generateCode() + ";" + NL;
-
 		result += tab() + "if (" + var + ")" + NL;
-
 		incIndent();
 			result += tab() + "goto " + label_then + ";" + NL;
 		decIndent();
-
-
 
 		result += tab() + "goto " + label_fin + ";" + NL;
 

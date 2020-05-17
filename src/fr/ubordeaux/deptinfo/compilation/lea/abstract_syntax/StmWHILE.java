@@ -14,13 +14,41 @@ public class StmWHILE extends StmUnary {
 
 	@Override
 	public String generateCode() throws CodeException {
+
 		String result = "";
 		result += super.generateCode();
-		// TODO
-		result += tab() + "_WHILE_" + this.getId() + ":" + NL;
+
+		String var = "_if_test__" + this.getId();
+		String label_then = "_if_label_then__" + this.getId();
+		String label_fin = "_if_label_fin__" + this.getId();
+
+		String label_jump_while = "_WHILE__" + this.getId();
+
+
+		result += tab() + "int " + var + ";" + NL;
+
+		result += tab() + label_jump_while + ":" + NL;
 		this.incIndent();
-		result += tab() + "// Code WHILE ici..." + NL;
-		result += tab() + "printf(\"--- Manque WHILE...\\n\");" + NL;
+
+		result += tab() + var + " = " + test.generateCode() + ";" + NL;
+		result += tab() + "if (" + var + ")" + NL;
+		incIndent();
+		result += tab() + "goto " + label_then + ";" + NL;
+		decIndent();
+
+		result += tab() + "goto " + label_fin + ";" + NL;
+
+		result += tab() + label_then + ":{" + NL;
+		incIndent();
+		result += getSon().generateCode();
+		decIndent();
+		result += tab() + "}" + NL;
+
+		result += tab() + "goto " + label_jump_while + ";" + NL;
+
+		result += tab() + label_fin + ":{}" + NL;
+
+
 		this.decIndent();
 		return result;
 	}
